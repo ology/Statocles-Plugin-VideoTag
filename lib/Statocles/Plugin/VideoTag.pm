@@ -48,17 +48,36 @@ has file_type => (
 
 Process the video bits of a L<Statocles::Page>.
 
+If the B<file_type> is given as C<youtu>, YouTube links of this exact
+form will be converted to an embedded iframe:
+
+  https://www.youtube.com/watch?v=abcdefg1234567
+
+Where the C<abcdefg1234567> is a placeholder for the actual video.
+
 =cut
 
 sub video_tag {
     my ($self, $page) = @_;
     if ($page->has_dom) {
-        $page->dom->find('a[href$=.'. $self->file_type .']')->each(sub {
-            my ($el) = @_;
-            my $replacement = sprintf '<video controls><source type="video/%s" src="%s"></video>',
-                $self->file_type, $el->attr('href');
-            $el->replace($replacement);
-        });
+        if ($self->file_type eq 'youtu') {
+            $page->dom->find('a[href*="'. $self->file_type .'"]')->each(sub {
+                my ($el) = @_;
+                my $href = $el->attr('href');
+                $href =~ s/watch\?v=(.+)$/embed\/$1/;
+                my $replacement = sprintf '<iframe width="560" height="315" src="%s" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
+                    $href;
+                $el->replace($replacement);
+            });
+        }
+        else {
+            $page->dom->find('a[href$=.'. $self->file_type .']')->each(sub {
+                my ($el) = @_;
+                my $replacement = sprintf '<video controls><source type="video/%s" src="%s"></video>',
+                    $self->file_type, $el->attr('href');
+                $el->replace($replacement);
+            });
+        }
     }
     return $page;
 }
