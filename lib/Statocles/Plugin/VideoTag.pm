@@ -2,7 +2,7 @@ package Statocles::Plugin::VideoTag;
 
 # ABSTRACT: Change video file anchors to video elements
 
-our $VERSION = '0.0100';
+our $VERSION = '0.0200';
 
 use Statocles::Base 'Class';
 with 'Statocles::Plugin';
@@ -17,7 +17,7 @@ with 'Statocles::Plugin';
             video_tag:
                 $class: Statocles::Plugin::VideoTag
                 $args:
-                     file_type: 'ogg'
+                     file_type: 'youtu'
 
 =head1 DESCRIPTION
 
