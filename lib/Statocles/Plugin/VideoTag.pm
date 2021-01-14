@@ -55,6 +55,10 @@ form will be converted to an embedded iframe:
 
 Where the C<abcdefg1234567> is a placeholder for the actual video.
 
+* Currently, including a start time (e.g. C<&t=42>) in the link is not
+honored.  In fact including any argument other than C<v> will not
+render the embedded video correctly.
+
 =cut
 
 sub video_tag {
