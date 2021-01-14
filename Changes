@@ -1,4 +1,6 @@
 Revision history for Statocles-Plugin-VideoTag
 
 {{$NEXT}}
+
+0.0100 2021-01-13 17:12:53
     - Adapt from Statocles::Plugin::AudioTag.
