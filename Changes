@@ -1,7 +1,11 @@
 Revision history for Statocles-Plugin-VideoTag
 
 {{$NEXT}}
+    - Improve documentation.
+
+0.0300 2021-03-19 18:35:10
     - Improve test.
+    - Add user definable iframe attributes for YouTube links.
 
 0.0200 2021-01-13 21:21:10
     - Special case embedded YouTube links.
