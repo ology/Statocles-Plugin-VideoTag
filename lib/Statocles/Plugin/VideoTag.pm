@@ -40,6 +40,76 @@ has file_type => (
     default => sub { 'mp4' },
 );
 
+=head2 width
+
+Width of the iframe for an embedded YouTube video.
+
+Default: C<560>
+
+=cut
+
+has width => (
+    is      => 'ro',
+    isa     => Int,
+    default => sub { 560 },
+);
+
+=head2 height
+
+Height of the iframe for an embedded YouTube video.
+
+Default: C<315>
+
+=cut
+
+has height => (
+    is      => 'ro',
+    isa     => Int,
+    default => sub { 315 },
+);
+
+=head2 frameborder
+
+Whether to have a frameborder on the iframe for a YouTube video.
+
+Default: C<0>
+
+=cut
+
+has frameborder => (
+    is      => 'ro',
+    isa     => Int,
+    default => sub { 0 },
+);
+
+=head2 allow
+
+The iframe B<allow> attribute string for a YouTube video.
+
+Default: C<accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture>
+
+=cut
+
+has allow => (
+    is      => 'ro',
+    isa     => Str,
+    default => sub { 'accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture' },
+);
+
+=head2 allowfullscreen
+
+Whether to allow full-screen for the iframe for a YouTube video.
+
+Default: C<1>
+
+=cut
+
+has allowfullscreen => (
+    is      => 'ro',
+    isa     => Int,
+    default => sub { 1 },
+);
+
 =head1 METHODS
 
 =head2 video_tag
@@ -69,8 +139,12 @@ sub video_tag {
                 my ($el) = @_;
                 my $href = $el->attr('href');
                 $href =~ s/watch\?v=(.+)$/embed\/$1/;
-                my $replacement = sprintf '<iframe width="560" height="315" src="%s" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
-                    $href;
+                my $replacement = sprintf '<iframe width="%d" height="%d" src="%s" frameborder="%d" allow="%s" %s></iframe>',
+                    $self->width, $self->height,
+                    $href, 
+                    $self->frameborder,
+                    $self->allow,
+                    $self->allowfullscreen ? 'allowfullscreen' : '';
                 $el->replace($replacement);
             });
         }
