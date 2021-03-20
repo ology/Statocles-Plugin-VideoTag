@@ -164,7 +164,8 @@ sub video_tag {
 
 =head2 register
 
-Register this plugin to install its event handlers. Called automatically.
+Register this plugin to install its event handlers. (This method is
+called automatically.)
 
 =cut
 
