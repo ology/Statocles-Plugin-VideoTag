@@ -143,7 +143,7 @@ sub video_tag {
                 $href =~ s/watch\?v=(.+)$/embed\/$1/;
                 my $replacement = sprintf '<iframe width="%d" height="%d" src="%s" frameborder="%d" allow="%s" %s></iframe>',
                     $self->width, $self->height,
-                    $href, 
+                    $href,
                     $self->frameborder,
                     $self->allow,
                     $self->allowfullscreen ? 'allowfullscreen' : '';
