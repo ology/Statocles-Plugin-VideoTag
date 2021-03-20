@@ -118,7 +118,7 @@ has allowfullscreen => (
 
   $page = $plugin->video_tag($page);
 
-Process the video bits of a L<Statocles::Page>.
+Process the video links on a L<Statocles::Page>.
 
 If the B<file_type> is given as C<youtu>, YouTube links of this exact
 form will be converted to an embedded iframe:
