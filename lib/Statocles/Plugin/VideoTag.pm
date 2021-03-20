@@ -18,6 +18,8 @@ with 'Statocles::Plugin';
                 $class: Statocles::Plugin::VideoTag
                 $args:
                      file_type: 'youtu'
+                     width: 500
+                     height: 300
 
 =head1 DESCRIPTION
 
