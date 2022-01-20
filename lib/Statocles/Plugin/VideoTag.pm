@@ -140,14 +140,16 @@ sub video_tag {
             $page->dom->find('a[href*="'. $self->file_type .'"]')->each(sub {
                 my ($el) = @_;
                 my $href = $el->attr('href');
-                $href =~ s/watch\?v=(.+)$/embed\/$1/;
-                my $replacement = sprintf '<iframe width="%d" height="%d" src="%s" frameborder="%d" allow="%s" %s></iframe>',
-                    $self->width, $self->height,
-                    $href,
-                    $self->frameborder,
-                    $self->allow,
-                    $self->allowfullscreen ? 'allowfullscreen' : '';
-                $el->replace($replacement);
+                if ($href =~ /watch\?v=.+$/) {
+                    $href =~ s/watch\?v=(.+)$/embed\/$1/;
+                    my $replacement = sprintf '<iframe width="%d" height="%d" src="%s" frameborder="%d" allow="%s" %s></iframe>',
+                        $self->width, $self->height,
+                        $href,
+                        $self->frameborder,
+                        $self->allow,
+                        $self->allowfullscreen ? 'allowfullscreen' : '';
+                    $el->replace($replacement);
+                }
             });
         }
         else {
