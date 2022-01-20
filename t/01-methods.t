@@ -30,6 +30,6 @@ $page = Statocles::Page::Plain->new(
 );
 
 $got = $plugin->video_tag($page);
-like $got->dom, qr|https://www.youtube.com/embed/|, 'video_tag';
+like $got->dom, qr|https://www\.youtube\.com/embed/|, 'video_tag';
 
 done_testing();
